@@ -1,5 +1,5 @@
 <?php
-    class Category{
+    class Category {
       // DB Stuff
       private $conn;
       private $table = 'categories';
@@ -26,6 +26,27 @@
         $stmt->execute();
 
         return $stmt;
+      }
+
+      // Get single category
+      public function read_single(){
+        // create query
+        $query = 'SELECT id, name, created_at FROM '.$this->table.' WHERE id = :id LIMIT 0,1';
+
+        // prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Bind ID
+        $stmt->bindParam(':id', $this->id);
+
+        // execute query
+        $stmt->execute();
+
+        // Fetch query
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->name = $row['name'];
       }
     }
 ?>
