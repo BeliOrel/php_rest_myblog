@@ -1,0 +1,2 @@
+# PHP REST API From Scratch #
+This application was built with the use of tutorial, which was made by [BRAD TRAVERSY](http://www.traversymedia.com), and can be accessed [here](https://www.youtube.com/watch?v=OEWXbpUMODk&list=PLillGF-RfqbZ3_Xr8do7Q2R752xYrDRAo).
