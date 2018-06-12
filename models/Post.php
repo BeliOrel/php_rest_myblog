@@ -177,5 +177,22 @@
       printf("Error: %s.\n", $stmt->error);
       return false;
     }
+
+    // count posts of the given category
+    public function countCat($cat){
+      // create query
+      $query = "SELECT COUNT(*) num_cat FROM ".$this->table." WHERE category_id = ".$cat;
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Execute query
+      $stmt->execute();
+
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      extract($row);
+
+      return $num_cat;
+    }
   }
 ?>

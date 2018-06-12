@@ -5,36 +5,31 @@
   header('Access-Control-Allow-Methods: PUT');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Methods, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-
   include_once '../../config/Database.php';
-  include_once '../../models/Post.php';
+  include_once '../../models/Category.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog post object
-  $post = new Post($db);
+  // Instantiate category object
+  $category = new Category($db);
 
-  // get raw posted data
+  // get raw category data
   $data = json_decode(file_get_contents("php://input"));
 
-  //set ID, because this is an update of the existing post
-  $post->id = $data->id;
+  //set ID, because this is an update of the existing category
+  $category->id = $data->id;
+  $category->name = $data->name;
 
-  $post->title = $data->title;
-  $post->body = $data->body;
-  $post->author = $data->author;
-  $post->category_id = $data->category_id;
-
-  // Update post
-  if($post->update()){
+  // update category
+  if($category->update()){
     echo json_encode(
-      array('message' => 'Post Updated')
+      array('message' => 'Category Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'Post Not Updated')
+      array('message' => 'Category Not Updated')
     );
   }
 ?>
